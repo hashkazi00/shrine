@@ -21,9 +21,9 @@ public class RegisterPageOne extends Fragment {
             @NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.reg_pageone_fragment, container, false);
-//        final TextInputLayout passwordTextInput = view.findViewById(R.id.password_text_input);
-//        final TextInputEditText passwordEditText = view.findViewById(R.id.password_edit_text);
+
         MaterialButton nextButton = view.findViewById(R.id.next_button);
+        MaterialButton cancelButton = view.findViewById(R.id.cancel_button);
 
         // Set an error if the password is less than 8 characters.
         nextButton.setOnClickListener(new View.OnClickListener() {
@@ -34,6 +34,19 @@ public class RegisterPageOne extends Fragment {
                 } else {
 //                    passwordTextInput.setError(null); // Clear the error
                     ((NavigationHost) getActivity()).navigateTo(new RegisterPageTwo(), false); // Navigate to the next Fragment
+                }
+            }
+        });
+
+        // Set an error if the password is less than 8 characters.
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (false) {
+//                    passwordTextInput.setError(getString(R.string.shr_error_password));
+                } else {
+//                    passwordTextInput.setError(null); // Clear the error
+                    ((NavigationHost) getActivity()).navigateTo(new FirstFragment(), false); // Navigate to the next Fragment
                 }
             }
         });

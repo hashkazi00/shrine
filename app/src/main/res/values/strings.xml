@@ -7,6 +7,7 @@
     <string name="shr_hint_serial">V-Device Number</string>
     <string name="shr_button_next">Next</string>
     <string name="shr_button_register">Register</string>
+    <string name="shr_button_login">Login</string>
     <string name="shr_button_cancel">Cancel</string>
     <string name="shr_button_back">Go Back</string>
     <string name="shr_error_password">Password must contain at least 8 characters.</string>
@@ -28,5 +29,7 @@
     <string name="shr_gender_f">Female</string>
     <string name="shr_gender_o">Others</string>
     <string name="shr_gender_n">Prefer Not To Say</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

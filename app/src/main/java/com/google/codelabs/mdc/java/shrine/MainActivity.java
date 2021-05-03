@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity implements NavigationHost {
         if (savedInstanceState == null) {
             getSupportFragmentManager()
                     .beginTransaction()
-                    .add(R.id.container, new RegisterPageOne())
+                    .add(R.id.container, new FirstFragment())
                     .commit();
         }
     }
