@@ -16,6 +16,8 @@ import com.google.android.material.textfield.TextInputLayout;
 
 public class RegisterPageTwo extends Fragment {
 
+
+
     @Override
     public View onCreateView(
             @NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -23,6 +25,7 @@ public class RegisterPageTwo extends Fragment {
             View view = inflater.inflate(R.layout.reg_pagetwo_fragment, container, false);
           final TextInputLayout passwordTextInput = view.findViewById(R.id.password_text_input);
           final TextInputEditText passwordEditText = view.findViewById(R.id.password_edit_text);
+
 
         //Instances that will help us get the texts.
         final TextInputEditText emailEditText = view.findViewById(R.id.email_edit_text);
@@ -51,6 +54,7 @@ public class RegisterPageTwo extends Fragment {
 //                        passwordTextInput.setError(getString(R.string.shr_error_password));
                 } else {
 //                        passwordTextInput.setError(null); // Clear the error
+                    Log.d("Registration Details: ", "First Name: "+ getArguments().getString("fname"));
 
                     Log.d("Registration Details: ", "Email: "+ emailEditText.getText().toString());
                     Log.d("Registration Details: ", "Password: "+ passwordEditText.getText().toString());

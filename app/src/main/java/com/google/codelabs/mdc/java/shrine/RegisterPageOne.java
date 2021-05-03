@@ -11,9 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.radiobutton.MaterialRadioButton;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
 
 /**
  * Fragment representing the login screen for Shrine.
@@ -25,6 +23,10 @@ public class RegisterPageOne extends Fragment {
             @NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.reg_pageone_fragment, container, false);
+
+        final Fragment pageTwo = new RegisterPageTwo();
+        final Bundle args = new Bundle();
+
 
         //Instances that will help us get the texts.
         final TextInputEditText fnameEditText = view.findViewById(R.id.fname_edit_text);
@@ -45,9 +47,21 @@ public class RegisterPageOne extends Fragment {
 //                    passwordTextInput.setError(null); // Clear the error
 
                     Log.d("Registration Details: ", "First name: "+ fnameEditText.getText().toString());
+
+                    args.putString("fname", fnameEditText.getText().toString());
                     Log.d("Registration Details: ", "Last name: "+ lnameEditText.getText().toString());
+                    args.putString("lname", lnameEditText.getText().toString());
                     findRadioButton(genderRadioGroup.getCheckedRadioButtonId());
-                    Log.d("Registration Details: ", "Birthdate: "+ bdateEditText.getText().toString());
+
+                    args.putString("gender", findRadioButton(genderRadioGroup.getCheckedRadioButtonId()));
+
+                    Log.d("Registration Details: ", "Birthday: "+ bdateEditText.getText().toString());
+
+                    args.putString("birthday", bdateEditText.getText().toString());
+
+                    pageTwo.setArguments(args);
+
+                    getFragmentManager().beginTransaction().add(R.id.container, pageTwo).commit();
 
                     ((NavigationHost) getActivity()).navigateTo(new RegisterPageTwo(), false); // Navigate to the next Fragment
                 }
@@ -72,18 +86,19 @@ public class RegisterPageOne extends Fragment {
     }
 
     //Converting the ID to a readable string.
-    private void findRadioButton(int checkedId){
+    private String findRadioButton(int checkedId){
         switch (checkedId){
             case R.id.radio_button_1:
                 Log.d("Registration Details: ", "Gender: Male");
-                break;
+                return "male";
             case R.id.radio_button_2:
                 Log.d("Registration Details: ", "Gender: Female");
-                break;
+                return "female";
             case R.id.radio_button_3:
                 Log.d("Registration Details: ", "Gender: Others");
-                break;
+                return "others";
         }
+        return "male";
     }
 
 }
