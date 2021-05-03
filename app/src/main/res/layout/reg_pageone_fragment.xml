@@ -45,14 +45,15 @@
         <!-- Snippet from "Add text fields" section goes here. -->
 
         <com.google.android.material.textfield.TextInputLayout
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-
             android:hint="@string/shr_hint_fname">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/fname_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
@@ -69,6 +70,7 @@
             >
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/lname_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
         </com.google.android.material.textfield.TextInputLayout>
@@ -123,6 +125,7 @@
             android:hint="Birthday(DD/MM/YYYY)">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/bdate_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="date"
