@@ -51,6 +51,12 @@ public class RegisterPageTwo extends Fragment {
 //                        passwordTextInput.setError(getString(R.string.shr_error_password));
                 } else {
 //                        passwordTextInput.setError(null); // Clear the error
+                    Bundle bundle = getArguments();
+                    //String value = getArguments().getString("YourKey");
+                    Log.d("Registration Details: ", "Fname: "+ bundle.getString("fname"));
+                    Log.d("Registration Details: ", "Lname: "+ bundle.getString("lname"));
+                    Log.d("Registration Details: ", "gender: "+ bundle.getString("gender"));
+                    Log.d("Registration Details: ", "Birth Date: "+ bundle.getString("bday"));
 
                     Log.d("Registration Details: ", "Email: "+ emailEditText.getText().toString());
                     Log.d("Registration Details: ", "Password: "+ passwordEditText.getText().toString());

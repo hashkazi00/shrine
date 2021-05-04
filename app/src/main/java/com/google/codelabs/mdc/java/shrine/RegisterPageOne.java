@@ -1,5 +1,8 @@
 package com.google.codelabs.mdc.java.shrine;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,6 +12,8 @@ import android.widget.RadioGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.radiobutton.MaterialRadioButton;
@@ -19,7 +24,12 @@ import com.google.android.material.textfield.TextInputLayout;
  * Fragment representing the login screen for Shrine.
  */
 public class RegisterPageOne extends Fragment {
+    sendDataInterface senddatainterface;
+    public interface sendDataInterface{
+        public void senddata(String fname, String lname, String gender, String bday);
+    }
 
+    Bundle bundle = new Bundle();
     @Override
     public View onCreateView(
             @NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -44,11 +54,21 @@ public class RegisterPageOne extends Fragment {
                 } else {
 //                    passwordTextInput.setError(null); // Clear the error
 
+                    bundle.putString("fname", fnameEditText.getText().toString());
+                    bundle.putString("lname", lnameEditText.getText().toString());
+                    bundle.putString("bday",  bdateEditText.getText().toString());
                     Log.d("Registration Details: ", "First name: "+ fnameEditText.getText().toString());
                     Log.d("Registration Details: ", "Last name: "+ lnameEditText.getText().toString());
                     findRadioButton(genderRadioGroup.getCheckedRadioButtonId());
                     Log.d("Registration Details: ", "Birthdate: "+ bdateEditText.getText().toString());
-
+                    /*RegisterPageTwo ldf = new RegisterPageTwo ();
+                    ldf.setArguments(bundle);
+                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.container, new RegisterPageTwo());
+                    fragmentTransaction.commit();*/
+                    senddatainterface.senddata(bundle.getString("fname"), bundle.getString("lname"),
+                            bundle.getString("gender"), bundle.getString("bday"));
                     ((NavigationHost) getActivity()).navigateTo(new RegisterPageTwo(), false); // Navigate to the next Fragment
                 }
             }
@@ -62,6 +82,7 @@ public class RegisterPageOne extends Fragment {
 //                    passwordTextInput.setError(getString(R.string.shr_error_password));
                 } else {
 //                    passwordTextInput.setError(null); // Clear the error
+
                     ((NavigationHost) getActivity()).navigateTo(new FirstFragment(), false); // Navigate to the next Fragment
                 }
             }
@@ -75,15 +96,30 @@ public class RegisterPageOne extends Fragment {
     private void findRadioButton(int checkedId){
         switch (checkedId){
             case R.id.radio_button_1:
+                bundle.putString("gender",  "Male");
                 Log.d("Registration Details: ", "Gender: Male");
                 break;
             case R.id.radio_button_2:
+                bundle.putString("gender",  "Female");
                 Log.d("Registration Details: ", "Gender: Female");
                 break;
             case R.id.radio_button_3:
+                bundle.putString("gender",  "Others");
                 Log.d("Registration Details: ", "Gender: Others");
                 break;
         }
     }
 
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+
+        Activity activity = (Activity) context;
+
+        try {
+            senddatainterface=(sendDataInterface) activity;
+        }catch (RuntimeException e){
+            throw new RuntimeException(activity.toString()+"Must implement method.. ");
+        }
+    }
 }
